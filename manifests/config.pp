@@ -16,11 +16,7 @@ class vault::config {
     'ui'                => $::vault::enable_ui,
   })
 
-  notify { "_config_hash": message => "${to_json_pretty($_config_hash)}" }
-
   $config_hash = merge($_config_hash, $::vault::extra_config)
-
-  notify { "config_hash": message => "${to_json_pretty($config_hash)}" }
 
   file { $::vault::config_dir:
     ensure  => directory,
